@@ -1,8 +1,16 @@
 const express = require( 'express' );
+const dotenv = require( 'dotenv' );
+const mongoose = require( 'mongoose' );
+const connectDb = require('./config/db')
+
+dotenv.config({ path: './config/.env'})
 
 const app = express();
 
-const port = 5000;
+connectDb();
+
+
+const port = process.env.PORT || 3000;
 
 
 app.listen( port, () =>
