@@ -1,0 +1,22 @@
+{
+  "name": "waste-management",
+  "version": "1.0.0",
+  "description": "Construction site waste management app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NickyGuants/Construction-Waste-management.git"
+  },
+  "author": "Team Marvel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickyGuants/Construction-Waste-management/issues"
+  },
+  "homepage": "https://github.com/NickyGuants/Construction-Waste-management#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
