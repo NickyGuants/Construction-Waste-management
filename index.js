@@ -1,19 +1,31 @@
-const express = require( 'express' );
-const dotenv = require( 'dotenv' );
-const mongoose = require( 'mongoose' );
+const express = require('express');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const connectDb = require('./config/db')
 
-dotenv.config({ path: './config/.env'})
-
+const cors = require("cors");
 const app = express();
 
-connectDb();
+dotenv.config({ path: './config/.env' })
 
+// import usersRoutes
+const userRoute = require('./components/users/routes/userRoutes');
+const { notFound, errorHandler } = require('./components/users/middlewares/errorMiddleware');
+
+
+app.use(express.json())
+app.use(cors());
+
+
+
+app.use('/account', userRoute)
+
+app.use(notFound);
+app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
+connectDb();
 
-
-app.listen( port, () =>
-{
-    console.log( `Waste management api running on port ${ port }` );
+app.listen(port, () => {
+    console.log(`Waste management api running on port ${ port }`);
 })
