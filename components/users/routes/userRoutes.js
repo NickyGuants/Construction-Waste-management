@@ -1,5 +1,5 @@
 const express = require('express')
-const { registerUser, authUser } = require('../controllers/userControllers')
+const { registerUser, authUser, getUsers, getSingleUser } = require('../controllers/userControllers')
 
 const router = express.Router()
 
@@ -7,7 +7,13 @@ const router = express.Router()
 router.route('/signup').post(registerUser)
 
 // login a user
-router.route("/login").post(authUser);
+router.route( "/login" ).post( authUser );
+
+//get all users
+router.route( "/" ).get( getUsers );
+
+//get single user
+router.route( "/:id" ).get( getSingleUser );
 
 
 
