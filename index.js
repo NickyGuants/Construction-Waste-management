@@ -18,7 +18,7 @@ app.use(cors());
 
 
 
-app.use('/account', userRoute)
+app.use('/users', userRoute)
 
 app.use(notFound);
 app.use(errorHandler);
