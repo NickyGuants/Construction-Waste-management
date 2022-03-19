@@ -85,7 +85,7 @@ const getUsers = asyncHandler( async ( req, res ) =>
 
 const getSingleUser = asyncHandler( async ( req, res ) =>
 {
-    const user = await User.findById( req.params._id );
+    const user = await User.findById( req.params.id );
 
     if ( user ) {
         res.status( 200 ).json( {
