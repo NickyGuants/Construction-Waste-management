@@ -1,7 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const connectDb = require('./config/db')
+const connectDb = require( './config/db' )
+const swaggerUi = require( 'swagger-ui-express' );
+const apiDocs = require( './E-Jenzi-api.swagger.json' );
 
 const cors = require("cors");
 const app = express();
@@ -17,7 +18,7 @@ app.use(express.json())
 app.use(cors());
 
 
-
+app.use( '/', swaggerUi.serve, swaggerUi.setup(apiDocs) );
 app.use('/users', userRoute)
 
 app.use(notFound);
