@@ -10,6 +10,9 @@ dotenv.config({ path: './config/.env' })
 
 // import usersRoutes
 const userRoute = require('./components/users/routes/userRoutes');
+// import siteRoutes
+const siteRoute = require('./components/sites/routes/siteRoutes')
+
 const { notFound, errorHandler } = require('./components/users/middlewares/errorMiddleware');
 
 
@@ -19,6 +22,7 @@ app.use(cors());
 
 
 app.use('/account', userRoute)
+app.use('/user', siteRoute)
 
 app.use(notFound);
 app.use(errorHandler);
