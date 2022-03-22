@@ -31,13 +31,13 @@ const registerUser = asyncHandler(async(req, res) => {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 pic: user.pic,
-                token: generateToken(user._id, user.isAdmin)
+                token: generateToken(user._id)
 
             }
         })
     } else {
         res.status(400);
-        throw new Error('error occurred, user not created')
+        throw new Error('error occurred, user not created ')
     }
     res.json({
         username,
@@ -58,7 +58,7 @@ const authUser = asyncHandler(async(req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
             pic: user.pic,
-            token: generateToken(user._id, user.isAdmin),
+            token: generateToken(user._id),
         });
     } else {
         res.status(400);
@@ -96,7 +96,7 @@ const updateUserProfile = asyncHandler(async(req, res) => {
             email: updatedUser.email,
             pic: updatedUser.pic,
             isAdmin: updatedUser.isAdmin,
-            token: generateToken(updatedUser._id, updatedUser.isAdmin),
+            token: generateToken(updatedUser._id),
         });
     } else {
         res.status(404)
