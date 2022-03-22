@@ -1,7 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const connectDb = require('./config/db')
+const connectDb = require( './config/db' )
+const swaggerUi = require( 'swagger-ui-express' );
+const apiDocs = require( './E-Jenzi-api.swagger.json' );
 
 const cors = require("cors");
 const app = express();
@@ -19,10 +20,10 @@ const { notFound, errorHandler } = require('./components/users/middlewares/error
 app.use(express.json())
 app.use(cors());
 
+app.use( '/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs) );
+app.use('/users', userRoute)
+app.use('/sites', siteRoute)
 
-
-app.use('/account', userRoute)
-app.use('/user', siteRoute)
 
 app.use(notFound);
 app.use(errorHandler);

@@ -1,14 +1,22 @@
 const express = require('express')
-const { registerUser, authUser, updateUserProfile } = require('../controllers/userControllers');
+
 const { protect, checkAdmin, } = require('../middlewares/authMiddleware');
+const { registerUser, authUser, getUsers, getSingleUser,updateUserProfile } = require('../controllers/userControllers')
+
 
 const router = express.Router()
 
 // create a user
-router.route('/signup').post(registerUser)
+router.route('/account/signup').post(registerUser)
 
 // login a user
-router.route("/login").post(authUser);
+router.route( "/account/login" ).post( authUser );
+
+//get all users
+router.route( "/" ).get( getUsers );
+
+//get single user
+router.route( "/:id" ).get( getSingleUser );
 
 // route to update users profile
 router.route("/profile").post(protect, updateUserProfile)

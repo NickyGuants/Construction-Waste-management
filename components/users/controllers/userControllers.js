@@ -65,7 +65,38 @@ const authUser = asyncHandler(async(req, res) => {
         throw new Error("Invalid email or password, Retry");
     }
 
-});
+} );
+
+const getUsers = asyncHandler( async ( req, res ) =>
+{
+    const users = await User.find();
+
+    if ( users.length > 0 ) {
+        res.status( 200 ).json( {
+            users,
+            result: users.length
+        })
+    } else {
+        res.status( 400 ).send( {
+            message: "No users registered in the database yet"
+        })
+    }
+} )
+
+const getSingleUser = asyncHandler( async ( req, res ) =>
+{
+    const user = await User.findById( req.params.id );
+
+    if ( user ) {
+        res.status( 200 ).json( {
+            data: user
+        })
+    } else {
+        res.status( 400 ).send( {
+            message: "No user with that id exists."
+        })
+    }
+})
 
 const updateUserProfile = asyncHandler(async(req, res) => {
 
@@ -105,5 +136,5 @@ const updateUserProfile = asyncHandler(async(req, res) => {
 
 })
 
+module.exports = { registerUser, authUser, getUsers, getSingleUser,updateUserProfile }
 
-module.exports = { registerUser, authUser, updateUserProfile }

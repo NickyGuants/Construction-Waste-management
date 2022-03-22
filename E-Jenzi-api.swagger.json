@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "E-Jenzi-api",
+    "description": "This is a custom connector for our waste management api",
+    "version": "1.0"
+  },
+  "host": "construction-site-waste-management.azurewebsites.net",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/users/": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "_id"
+                      },
+                      "username": {
+                        "type": "string",
+                        "description": "username"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "email"
+                      },
+                      "isAdmin": {
+                        "type": "boolean",
+                        "description": "isAdmin"
+                      },
+                      "password": {
+                        "type": "string",
+                        "description": "password"
+                      },
+                      "pic": {
+                        "type": "string",
+                        "description": "pic"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "description": "createdAt"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "description": "updatedAt"
+                      },
+                      "__v": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "__v"
+                      }
+                    }
+                  },
+                  "description": "users"
+                },
+                "result": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "result"
+                }
+              }
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "Content-Type",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "summary": "Get all users",
+        "description": "Get all users registered on the app",
+        "operationId": "Get-all-users",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/users/id": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "_id"
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "username"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "email"
+                    },
+                    "isAdmin": {
+                      "type": "boolean",
+                      "description": "isAdmin"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "password"
+                    },
+                    "pic": {
+                      "type": "string",
+                      "description": "pic"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "createdAt"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "updatedAt"
+                    },
+                    "__v": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "__v"
+                    }
+                  },
+                  "description": "data"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Single User",
+        "description": "Get a single user",
+        "operationId": "Single-User",
+        "parameters": []
+      }
+    },
+    "/users/account/signup": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "_id"
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "username"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "email"
+                    },
+                    "isAdmin": {
+                      "type": "boolean",
+                      "description": "isAdmin"
+                    },
+                    "pic": {
+                      "type": "string",
+                      "description": "pic"
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "token"
+                    }
+                  },
+                  "description": "user"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Sign Up",
+        "description": "Allow users to sign up to the application",
+        "operationId": "Signup",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "description": "username"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "password"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": []
+}
