@@ -11,15 +11,19 @@ dotenv.config({ path: './config/.env' })
 
 // import usersRoutes
 const userRoute = require('./components/users/routes/userRoutes');
+// import siteRoutes
+const siteRoute = require('./components/sites/routes/siteRoutes')
+
 const { notFound, errorHandler } = require('./components/users/middlewares/errorMiddleware');
 
 
 app.use(express.json())
 app.use(cors());
 
-
 app.use( '/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs) );
 app.use('/users', userRoute)
+app.use('/sites', siteRoute)
+
 
 app.use(notFound);
 app.use(errorHandler);
