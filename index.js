@@ -1,8 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDb = require( './config/db' )
-const swaggerUi = require( 'swagger-ui-express' );
-const apiDocs = require( './E-Jenzi-api.swagger.json' );
+const mongoose = require('mongoose');
+const connectDb = require('./config/db')
 
 const cors = require("cors");
 const app = express();
@@ -14,15 +13,23 @@ const userRoute = require('./components/users/routes/userRoutes');
 // import siteRoutes
 const siteRoute = require('./components/sites/routes/siteRoutes')
 
+//const wasteRoute = require('./components/wastes/routes/wasteRoute')
+
+const pickupRoute = require('./components/pickups/routes/pickupRoutes')
+
+
 const { notFound, errorHandler } = require('./components/users/middlewares/errorMiddleware');
 
 
 app.use(express.json())
 app.use(cors());
 
-app.use( '/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs) );
-app.use('/users', userRoute)
-app.use('/sites', siteRoute)
+
+
+app.use('/account', userRoute)
+app.use('/user', siteRoute)
+    //app.use('/waste', wasteRoute)
+app.use('/pickup', pickupRoute)
 
 
 app.use(notFound);
