@@ -22,7 +22,7 @@ router.route( "/:id" ).get( getSingleUser );
 router.route("/profile").post(protect, updateUserProfile)
 
 
-router.route("/admin/login").post(protect, checkAdmin, authUser)
+router.route("/admin/login").post(/*protect,*/ checkAdmin, authUser)
 
 // once logged in as admin you should be able to get all users/ all sites etc
 
