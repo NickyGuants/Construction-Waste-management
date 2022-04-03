@@ -4,6 +4,7 @@ const swaggerUi = require( "swagger-ui-express" );
 const connectDb = require( './config/db' )
 const apiDocs = require("./E-Jenzi-api.swagger.json")
 
+
 const cors = require("cors");
 const app = express();
 
