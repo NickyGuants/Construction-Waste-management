@@ -73,36 +73,48 @@ const getAllPickups = asyncHandler(async(req, res, next) => {
 const getUserPickups = asyncHandler(async(req, res, next) => {
 
     try {
-        const { userEmail } = req.body
-        console.log(userEmail)
+        const userEmail = await req.userEmail
+        console.log("user email is : " + userEmail)
 
         if (!userEmail) {
             res.status(400).json({
                 message: "cannot get specific users pickups. Please specify userEmail"
             })
-            return
+            return;
         } else {
             const getPickups = await Pickup.find({
                 userEmail: userEmail
             })
-            const newPickups = getPickups.map(p => ({
-                sitename: p.sitename,
-                userEmail: p.userEmail,
-                details: p.details,
-                cost: p.cost,
-                weight: p.weight,
-                collected: p.collected,
-                date: p.date,
-                _id: p._id
+            if (getPickups.length > 0) {
 
-            }))
+                const newPickups = getPickups.map((p) => ({
+                    sitename: p.sitename,
+                    userEmail: p.userEmail,
+                    details: p.details,
+                    cost: p.cost,
+                    weight: p.weight,
+                    collected: p.collected,
+                    date: p.date,
+                    _id: p._id,
+                }));
 
-            res.status(201).json({
-                message: "Successfully gotten the specified user pickups ",
-                pickup: {
-                    pickups: newPickups
+                if (newPickups) {
+                    res.status(201).json({
+                        message: "Successfully gotten the specified user pickups ",
+                        pickup: {
+                            pickups: newPickups,
+                        },
+                    });
                 }
-            })
+
+            } else {
+                res.status(404).json({
+                    error: "that email does not have any pickups",
+                });
+                return;
+            }
+
+
         }
 
     } catch (error) {
