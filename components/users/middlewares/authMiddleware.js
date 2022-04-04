@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/users')
+const Site = require('../../sites/models/sites')
+const Waste = require('../../wastes/models/wastes')
 
 const asyncHandler = require('express-async-handler')
 
@@ -28,7 +30,7 @@ const protect = asyncHandler(async(req, res, next) => {
             next();
         } catch (error) {
             res.status(401);
-            throw new Error("Not authorized, token failed");
+            throw new Error("Not authorized, site token failed");
         }
     }
 
@@ -38,6 +40,71 @@ const protect = asyncHandler(async(req, res, next) => {
     }
 });
 
+const protectSite = asyncHandler(async(req, res, next) => {
+    let token;
+
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")
+    ) {
+        try {
+            token = await req.headers.authorization.split(" ")[1];
+
+            console.log("token is: " + token);
+
+            //decodes token id
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            req.site = await Site.findById(decoded.id).select("-password");
+
+            // const admin = req.user.isAdmin
+            // console.log(admin)
+
+            next();
+        } catch (error) {
+            res.status(401);
+            throw new Error("Not authorized, token failed.");
+        }
+    }
+
+    if (!token) {
+        res.status(401);
+        throw new Error("Not authorized to view wastes, since no token");
+    }
+});
+
+const protectWaste = asyncHandler(async(req, res, next) => {
+    let token;
+
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")
+    ) {
+        try {
+            token = await req.headers.authorization.split(" ")[1];
+
+            console.log("token is: " + token);
+
+            //decodes token id
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            req.waste = await Waste.findById(decoded.id).select("-password");
+
+            // const admin = req.user.isAdmin
+            // console.log(admin)
+
+            next();
+        } catch (error) {
+            res.status(401);
+            throw new Error("Not authorized, waste token failed.");
+        }
+    }
+
+    if (!token) {
+        res.status(401);
+        throw new Error("Not authorized to view wastes, since no token");
+    }
+});
 const checkAdmin = asyncHandler(async(req, res, next) => {
 
     let token;
@@ -71,5 +138,39 @@ const checkAdmin = asyncHandler(async(req, res, next) => {
 
 })
 
+const checkUserEmail = asyncHandler(async(req, res, next) => {
+    let userEmail;
+    //let token;
 
-module.exports = { protect, checkAdmin }
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")
+    ) {
+        try {
+            userEmail = await req.headers.authorization.split(" ")[1];
+
+            console.log("My userEmail is: " + userEmail);
+
+            //decodes token id
+            //const decoded = jwt.verify(userEmail, process.env.JWT_SECRET);
+
+            req.userEmail = await userEmail
+
+            // const admin = req.user.isAdmin
+            // console.log(admin)
+
+            next();
+        } catch (error) {
+            res.status(401);
+            throw new Error("Error getting userEmail");
+        }
+    }
+
+    if (!userEmail) {
+        res.status(401);
+        throw new Error("No email specified");
+    }
+
+})
+
+module.exports = { protect, checkAdmin, protectSite, protectWaste, checkUserEmail }
