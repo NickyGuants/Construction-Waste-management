@@ -1,5 +1,5 @@
 const express = require("express");
-const { protect, checkAdmin } = require("../../users/middlewares/authMiddleware");
+const { protect, checkAdmin, checkUserEmail } = require("../../users/middlewares/authMiddleware");
 
 
 const {
@@ -17,7 +17,7 @@ router.route('/create').post(createPickup)
 
 
 // router to get specifc user pickups
-router.route('/myPickups').get(getUserPickups)
+router.route('/myPickups').get(checkUserEmail, getUserPickups)
 
 
 // router to get all pickups requests for admin
