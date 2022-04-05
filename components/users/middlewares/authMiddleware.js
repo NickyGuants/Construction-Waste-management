@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/users')
 const Site = require('../../sites/models/sites')
-const Waste = require('../../wastes/models/wastes')
 
 const asyncHandler = require('express-async-handler')
 
@@ -73,38 +72,6 @@ const protectSite = asyncHandler(async(req, res, next) => {
     }
 });
 
-const protectWaste = asyncHandler(async(req, res, next) => {
-    let token;
-
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith("Bearer")
-    ) {
-        try {
-            token = await req.headers.authorization.split(" ")[1];
-
-            console.log("token is: " + token);
-
-            //decodes token id
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-            req.waste = await Waste.findById(decoded.id).select("-password");
-
-            // const admin = req.user.isAdmin
-            // console.log(admin)
-
-            next();
-        } catch (error) {
-            res.status(401);
-            throw new Error("Not authorized, waste token failed.");
-        }
-    }
-
-    if (!token) {
-        res.status(401);
-        throw new Error("Not authorized to view wastes, since no token");
-    }
-});
 const checkAdmin = asyncHandler(async(req, res, next) => {
 
     let token;
@@ -173,4 +140,4 @@ const checkUserEmail = asyncHandler(async(req, res, next) => {
 
 })
 
-module.exports = { protect, checkAdmin, protectSite, protectWaste, checkUserEmail }
+module.exports = { protect, checkAdmin, protectSite, checkUserEmail }
