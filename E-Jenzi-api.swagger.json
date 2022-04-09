@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "E-Jenzi-api",
-    "description": "This is a custom connector for our waste management api",
+    "title": "NewEjenzi",
+    "description": "",
     "version": "1.0"
   },
   "host": "construction-site-waste-management.azurewebsites.net",
@@ -13,7 +13,78 @@
   "consumes": [],
   "produces": [],
   "paths": {
-    "/users/": {
+    "/sites/sites/": {},
+    "/users/account/login": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "_id"
+                },
+                "username": {
+                  "type": "string",
+                  "description": "username"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "email"
+                },
+                "isAdmin": {
+                  "type": "boolean",
+                  "description": "isAdmin"
+                },
+                "pic": {
+                  "type": "string",
+                  "description": "pic"
+                },
+                "token": {
+                  "type": "string",
+                  "description": "token"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "stack": {
+                  "type": "string",
+                  "description": "stack"
+                }
+              }
+            }
+          }
+        },
+        "summary": "LoginNew",
+        "operationId": "LoginNew",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "password"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/sites/sites/create": {},
+    "/sites/:id": {},
+    "/sites/": {
       "get": {
         "responses": {
           "default": {
@@ -21,7 +92,628 @@
             "schema": {
               "type": "object",
               "properties": {
-                "users": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "site": {
+                  "type": "object",
+                  "properties": {
+                    "sites": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "sitename": {
+                            "type": "string",
+                            "description": "sitename"
+                          },
+                          "desc": {
+                            "type": "string",
+                            "description": "desc"
+                          },
+                          "lat": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "lat"
+                          },
+                          "long": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "long"
+                          },
+                          "token": {
+                            "type": "string",
+                            "description": "token"
+                          },
+                          "user": {
+                            "type": "string",
+                            "description": "user"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "description": "_id"
+                          }
+                        }
+                      },
+                      "description": "sites"
+                    }
+                  },
+                  "description": "site"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetSingleUserSite",
+        "operationId": "GetSingleUserSite",
+        "parameters": [
+          {
+            "name": "Access-Token",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sites/{_id}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "specificSite": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "_id"
+                    },
+                    "sitename": {
+                      "type": "string",
+                      "description": "sitename"
+                    },
+                    "lat": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "lat"
+                    },
+                    "long": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "long"
+                    },
+                    "user": {
+                      "type": "string",
+                      "description": "user"
+                    },
+                    "desc": {
+                      "type": "string",
+                      "description": "desc"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "createdAt"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "updatedAt"
+                    },
+                    "__v": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "__v"
+                    }
+                  },
+                  "description": "specificSite"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetSpecificSiteDetails",
+        "operationId": "GetSpecificSite",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sites/create": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "createdSite": {
+                  "type": "object",
+                  "properties": {
+                    "sitename": {
+                      "type": "string",
+                      "description": "sitename"
+                    },
+                    "lat": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "lat"
+                    },
+                    "long": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "long"
+                    },
+                    "user": {
+                      "type": "string",
+                      "description": "user"
+                    },
+                    "desc": {
+                      "type": "string",
+                      "description": "desc"
+                    },
+                    "_id": {
+                      "type": "string",
+                      "description": "_id"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "createdAt"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "updatedAt"
+                    },
+                    "__v": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "__v"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "message"
+                    },
+                    "stack": {
+                      "type": "string",
+                      "description": "stack"
+                    }
+                  },
+                  "description": "createdSite"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateASite",
+        "operationId": "CreateASite",
+        "parameters": [
+          {
+            "name": "Access-Token",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "string",
+                  "description": "lat"
+                },
+                "long": {
+                  "type": "string",
+                  "description": "long"
+                },
+                "sitename": {
+                  "type": "string",
+                  "description": "sitename"
+                },
+                "desc": {
+                  "type": "string",
+                  "description": "desc"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/sites/edit/{_id}": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "description": "success"
+                },
+                "error": {
+                  "type": "string",
+                  "description": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "stack": {
+                  "type": "string",
+                  "description": "stack"
+                },
+                "site": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "_id"
+                    },
+                    "sitename": {
+                      "type": "string",
+                      "description": "sitename"
+                    },
+                    "lat": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "lat"
+                    },
+                    "long": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "long"
+                    },
+                    "user": {
+                      "type": "string",
+                      "description": "user"
+                    },
+                    "desc": {
+                      "type": "string",
+                      "description": "desc"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "createdAt"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "updatedAt"
+                    },
+                    "__v": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "__v"
+                    }
+                  },
+                  "description": "site"
+                }
+              }
+            }
+          }
+        },
+        "summary": "EditSpecificSite",
+        "operationId": "EditSpecificSite",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sitename": {
+                  "type": "string",
+                  "description": "sitename"
+                },
+                "desc": {
+                  "type": "string",
+                  "description": "desc"
+                },
+                "lat": {
+                  "type": "string",
+                  "description": "lat"
+                },
+                "long": {
+                  "type": "string",
+                  "description": "long"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/sites/delete/{_id}": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "stack": {
+                  "type": "string",
+                  "description": "stack"
+                }
+              }
+            }
+          }
+        },
+        "summary": "DeleteASite",
+        "operationId": "DeleteASite",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/users/profile": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "_id"
+                },
+                "username": {
+                  "type": "string",
+                  "description": "username"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "email"
+                },
+                "pic": {
+                  "type": "string",
+                  "description": "pic"
+                },
+                "isAdmin": {
+                  "type": "boolean",
+                  "description": "isAdmin"
+                },
+                "token": {
+                  "type": "string",
+                  "description": "token"
+                }
+              }
+            }
+          }
+        },
+        "summary": "UpdateUserProfile",
+        "operationId": "UpdateUserProfile",
+        "parameters": [
+          {
+            "name": "Access-Token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pic": {
+                  "type": "string",
+                  "description": "pic"
+                },
+                "username": {
+                  "type": "string",
+                  "description": "username"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/sites/every": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "site": {
+                  "type": "object",
+                  "properties": {
+                    "sites": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "description": "_id"
+                          },
+                          "sitename": {
+                            "type": "string",
+                            "description": "sitename"
+                          },
+                          "lat": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "lat"
+                          },
+                          "long": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "long"
+                          },
+                          "user": {
+                            "type": "string",
+                            "description": "user"
+                          },
+                          "desc": {
+                            "type": "string",
+                            "description": "desc"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "description": "createdAt"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "description": "updatedAt"
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "__v"
+                          }
+                        }
+                      },
+                      "description": "sites"
+                    }
+                  },
+                  "description": "site"
+                }
+              }
+            }
+          }
+        },
+        "summary": "AdminGetAllSites",
+        "operationId": "AdminGetAllSites",
+        "parameters": []
+      }
+    },
+    "/pickup/create": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "pickup": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "_id"
+                    },
+                    "sitename": {
+                      "type": "string",
+                      "description": "sitename"
+                    },
+                    "userEmail": {
+                      "type": "string",
+                      "description": "userEmail"
+                    },
+                    "date": {
+                      "type": "string",
+                      "description": "date"
+                    },
+                    "collected": {
+                      "type": "boolean",
+                      "description": "collected"
+                    },
+                    "weight": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "weight"
+                    },
+                    "cost": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "cost"
+                    }
+                  },
+                  "description": "pickup"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CreateAPickup",
+        "operationId": "CreateAPickup",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sitename": {
+                  "type": "string",
+                  "description": "sitename"
+                },
+                "userEmail": {
+                  "type": "string",
+                  "description": "userEmail"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "date"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/pickup/allPickups": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "pickups": {
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -30,25 +722,31 @@
                         "type": "string",
                         "description": "_id"
                       },
-                      "username": {
+                      "sitename": {
                         "type": "string",
-                        "description": "username"
+                        "description": "sitename"
                       },
-                      "email": {
+                      "userEmail": {
                         "type": "string",
-                        "description": "email"
+                        "description": "userEmail"
                       },
-                      "isAdmin": {
+                      "date": {
+                        "type": "string",
+                        "description": "date"
+                      },
+                      "weight": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "weight"
+                      },
+                      "collected": {
                         "type": "boolean",
-                        "description": "isAdmin"
+                        "description": "collected"
                       },
-                      "password": {
-                        "type": "string",
-                        "description": "password"
-                      },
-                      "pic": {
-                        "type": "string",
-                        "description": "pic"
+                      "cost": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "cost"
                       },
                       "createdAt": {
                         "type": "string",
@@ -65,37 +763,18 @@
                       }
                     }
                   },
-                  "description": "users"
-                },
-                "result": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "result"
+                  "description": "pickups"
                 }
-              }
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "Content-Type",
-                "type": "string"
               }
             }
           }
         },
-        "summary": "Get all users",
-        "description": "Get all users registered on the app",
-        "operationId": "Get-all-users",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          }
-        ]
+        "summary": "AdminGetAllPickups",
+        "operationId": "AdminGetAllPickups",
+        "parameters": []
       }
     },
-    "/users/id": {
+    "/pickup/myPickups": {
       "get": {
         "responses": {
           "default": {
@@ -103,32 +782,123 @@
             "schema": {
               "type": "object",
               "properties": {
-                "data": {
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "error": {
+                  "type": "string",
+                  "description": "error"
+                },
+                "pickup": {
+                  "type": "object",
+                  "properties": {
+                    "pickups": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "sitename": {
+                            "type": "string",
+                            "description": "sitename"
+                          },
+                          "userEmail": {
+                            "type": "string",
+                            "description": "userEmail"
+                          },
+                          "details": {
+                            "type": "string",
+                            "description": "details"
+                          },
+                          "cost": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "cost"
+                          },
+                          "weight": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "weight"
+                          },
+                          "collected": {
+                            "type": "boolean",
+                            "description": "collected"
+                          },
+                          "date": {
+                            "type": "string",
+                            "description": "date"
+                          },
+                          "_id": {
+                            "type": "string",
+                            "description": "_id"
+                          }
+                        }
+                      },
+                      "description": "pickups"
+                    }
+                  },
+                  "description": "pickup"
+                }
+              }
+            }
+          }
+        },
+        "summary": "GetUserPickups",
+        "operationId": "GetUserPickups",
+        "parameters": [
+          {
+            "name": "Access-Token",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/pickup/update/{_id}": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "description": "success"
+                },
+                "pickup": {
                   "type": "object",
                   "properties": {
                     "_id": {
                       "type": "string",
                       "description": "_id"
                     },
-                    "username": {
+                    "sitename": {
                       "type": "string",
-                      "description": "username"
+                      "description": "sitename"
                     },
-                    "email": {
+                    "userEmail": {
                       "type": "string",
-                      "description": "email"
+                      "description": "userEmail"
                     },
-                    "isAdmin": {
+                    "date": {
+                      "type": "string",
+                      "description": "date"
+                    },
+                    "weight": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "weight"
+                    },
+                    "collected": {
                       "type": "boolean",
-                      "description": "isAdmin"
+                      "description": "collected"
                     },
-                    "password": {
-                      "type": "string",
-                      "description": "password"
-                    },
-                    "pic": {
-                      "type": "string",
-                      "description": "pic"
+                    "cost": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "cost"
                     },
                     "createdAt": {
                       "type": "string",
@@ -142,21 +912,65 @@
                       "type": "integer",
                       "format": "int32",
                       "description": "__v"
+                    },
+                    "details": {
+                      "type": "string",
+                      "description": "details"
                     }
                   },
-                  "description": "data"
+                  "description": "pickup"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "stack": {
+                  "type": "string",
+                  "description": "stack"
                 }
               }
             }
           }
         },
-        "summary": "Get Single User",
-        "description": "Get a single user",
-        "operationId": "Single-User",
-        "parameters": []
+        "summary": "AdminUpdateSpecificPickup",
+        "operationId": "AdminUpdateSpecificPickup",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cost": {
+                  "type": "string",
+                  "description": "cost"
+                },
+                "weight": {
+                  "type": "string",
+                  "description": "weight"
+                },
+                "details": {
+                  "type": "string",
+                  "description": "details"
+                },
+                "collected": {
+                  "type": "boolean",
+                  "description": "collected"
+                }
+              }
+            }
+          }
+        ]
       }
     },
-    "/users/account/signup": {
+    "/users/admin/login": {
       "post": {
         "responses": {
           "default": {
@@ -168,46 +982,43 @@
                   "type": "string",
                   "description": "message"
                 },
-                "user": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string",
-                      "description": "_id"
-                    },
-                    "username": {
-                      "type": "string",
-                      "description": "username"
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "email"
-                    },
-                    "isAdmin": {
-                      "type": "boolean",
-                      "description": "isAdmin"
-                    },
-                    "pic": {
-                      "type": "string",
-                      "description": "pic"
-                    },
-                    "token": {
-                      "type": "string",
-                      "description": "token"
-                    }
-                  },
-                  "description": "user"
+                "stack": {
+                  "type": "string",
+                  "description": "stack"
+                },
+                "_id": {
+                  "type": "string",
+                  "description": "_id"
+                },
+                "username": {
+                  "type": "string",
+                  "description": "username"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "email"
+                },
+                "isAdmin": {
+                  "type": "boolean",
+                  "description": "isAdmin"
+                },
+                "pic": {
+                  "type": "string",
+                  "description": "pic"
+                },
+                "token": {
+                  "type": "string",
+                  "description": "token"
                 }
               }
             }
           }
         },
-        "summary": "Sign Up",
-        "description": "Allow users to sign up to the application",
-        "operationId": "Signup",
+        "summary": "AdminLogin",
+        "operationId": "AdminLogin",
         "parameters": [
           {
-            "name": "Content-Type",
+            "name": "Access-Token",
             "in": "header",
             "required": false,
             "type": "string"
@@ -219,10 +1030,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
-                  "type": "string",
-                  "description": "username"
-                },
                 "email": {
                   "type": "string",
                   "description": "email"
